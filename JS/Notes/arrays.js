@@ -150,7 +150,8 @@ for (var i=0; i<matrix3x3x3.length; i++){
 // Method - filter() Creates an array with each element that evaluates to true in the function provided.
 // Method - forEach() Executes a specific function on each element of the array.
 // Method - join() Joins are array elements into a string.
-// Method - indexOf() Searches the array for specific elements and returns its position.
+// Method - IndexOf() Searches the array for the given param and returns the position of the first matched element.
+// Method - lastIndexOf() Searches the array for the given param and returns the position of the last matched element.
 // Method - map() Creates a new array with the result of calling the specified function on each element of the array.
 // Method - reverse() Reverses the array so the last items become the first and vice versa.
 // Method - slice() Returns a new array from the specified index.
@@ -211,3 +212,88 @@ numbers.sort(); // Here we use sort() to place the array in numerical order.
 numbers.sort(function(a,b){
   return a-b;
 });
+
+// The above code can also be represented as follows due to sort() being
+// able to accept a functional param called compareFunction which assumes
+// the value of compare() below:
+
+function compare(a,b) {
+  if (a<b){
+    return -1;
+  }
+  if (a>b) {
+    return 1;
+  }
+  // a must be equal to b
+  return 0;
+}
+
+numbers.sort(compare);
+
+
+// Custom Sorting
+
+// We create an array of objects with different age values.
+var friends = [
+  {name: 'John', age: 30},
+  {name: 'Ana', age: 20},
+  {name: 'Chris', age: 25}
+];
+
+// The function below compares the ages and returns the objects
+// by age in ascending order.
+function comparePerson(a,b){
+  if (a.age < b.age) {
+    return -1;
+  }
+  if (a.age > b.age) {
+    return 1;
+  }
+  return 0;
+}
+
+console.log(friends.sort(comparePerson)); // outputs objects in ascending order by age.
+
+// Sorting strings
+
+var names = ['Ana', 'ana', 'john', 'John'];
+console.log(names.sort()); // => ['Ana', 'John', 'ana', 'john']
+// the above return results from how JS compares strings, which is by using
+// the characters corresponding ASCII value. The lower the value, the earliest
+// it appears in the alphabet. If the value is capitalized then it receives a lower
+// value than when lower case, even if the same character.
+
+
+// However, we can ignore the case of the character with the following code:
+names.sort(function(a,b) {
+  if (a.toLowerCase() < b.toLowerCase()) {
+    return -1;
+  }
+  if (a.toLowerCase() > b.toLowerCase()) {
+    return 1;
+  }
+  return 0;
+})
+
+// And for accented characters we can use the method localeCompare()
+var names2 = ['Maéve', 'Maeve'];
+
+console.log(names2.sort(function(a,b){
+  return a.localeCompare(b);  // => ['Maeve', 'Maéve']
+}));
+
+// Searching
+
+console.log(numbers.indexOf(10)); // indexOf() takes a param and searches the array for the first matched element. => 9
+console.log(numbers.indexOf(100)); // => -1 , because the element does not exist in the array.
+
+// Similarly
+numbers.push(10);
+console.log(numbers.lastIndexOf(10)); // lastIndexOf takes a param and searches the array for the last matched element. => 15
+console.log(numbers.lastIndexOf(100)); // => -1, same reason above.
+
+// toString() & join()
+console.log(numbers.toString()) // outputs all elements in the array into 1 string joined by commas.
+
+var numbersString = numbers.join('-'); // joins all elements within the array by dashes to store in numbersString.
+console.log(numbersString); // outputs all elemens in the array into 1 string joined by dashes.
