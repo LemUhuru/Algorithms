@@ -1,5 +1,7 @@
 'use strict';
 
+// Ch 2: Arrays: Notes from the book: Learning JavaScript Data Strcutures & Algorithms.
+
 // Creating and initializing arrays
 
 var daysOfWeek = new Array(); // Defines an empty array.
@@ -139,3 +141,73 @@ for (var i=0; i<matrix3x3x3.length; i++){
     }
   }
 }
+
+
+// References for JavaScript Array Methods.
+
+// Method - concat() Joins multiple arrays and returns a copy of the joined arrays.
+// Method - every() Calls a function for every element of the array until false is returned.
+// Method - filter() Creates an array with each element that evaluates to true in the function provided.
+// Method - forEach() Executes a specific function on each element of the array.
+// Method - join() Joins are array elements into a string.
+// Method - indexOf() Searches the array for specific elements and returns its position.
+// Method - map() Creates a new array with the result of calling the specified function on each element of the array.
+// Method - reverse() Reverses the array so the last items become the first and vice versa.
+// Method - slice() Returns a new array from the specified index.
+// Method - some() Passes each element through the supplied function until true is returned.
+// Method - sort() Sorts the array alphabetically or by the supplied function.
+// Method - toString() Returns the array as a string.
+// Method - valueOf() Like the method toString(), returns the array as a string.
+// Method - reduce() accepts a functional param with 3 arguements (previous, current, index)
+// - returns a summation of all the elements within the array.
+
+
+// Iterator Functions
+
+// isEven function outputs a param x, and return true or false if the param is a multiple of 2.
+var isEven = function(x) {
+  // returns true if x is a multiple of 2.
+  console.log(x);
+  return (x % 2 == 0) ? true : false;
+};
+
+var numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]; // Define array of 15 elements.
+
+numbers.every(isEven); // Uses the every() method to iterate over array until function returns False.
+numbers.some(isEven); // Same as every() only stops iteration when function returns True.
+
+// We use the forEach() function to iterate over array for every element, returning
+// True or False if the param is a multiple of 2 or not.
+numbers.forEach(function(x){
+  console.log(x%2 == 0);
+});
+
+var myMap = numbers.map(isEven); // map() produces similar output to the function above.
+
+var evenNumbers = numbers.filter(isEven); // filter() accepts a function as a param and returns only output that returns True.
+// In this case the values of numbers that meet the Truth condition in isEven() will be returned as an array in evenNumbers.
+
+// reduce() returns a summation of all the elements within the array.
+// the return value here is: 120.
+numbers.reduce(function(previous, current, index){
+  return previous + current;
+});
+
+
+// Searching & Sorting
+
+numbers.reverse(); // Here we reverse the order of the numbers array.
+// => [15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
+numbers.sort(); // Here we use sort() to place the array in numerical order.
+// => [1,10,11,12,13,14,15,2,3,4,5,6,7,8,9]
+
+// Which fails because the sort() method sorts the elements lexicographically,
+// and assume all elements are strings.
+
+// The sort method accepts a functional argument that can be used for custom sorting.
+// the Functinal param below accepts 2 input a and b as elements from the array and compare them both.
+// if a is larger than b, then a positive 1 is returned, -1, if its smaller, and 0 if equal.
+// These return values (-1,0,1) determine how each element is sorted.
+numbers.sort(function(a,b){
+  return a-b;
+});
