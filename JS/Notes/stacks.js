@@ -4,7 +4,6 @@
 // A stack is an ordered collection of items that follows the LIFO (Last In First Out) principle.
 
 function Stack() {
-  // properties and methods go here.
   var items = []; // stores the element of the stack;
 
   // the push() method add elements to the end of the stack.
